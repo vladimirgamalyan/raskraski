@@ -1,0 +1,46 @@
+<UserControl x:Class="raskraski.CategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Black">
+
+	<ListBox ItemsSource="{Binding Categories}"
+             MouseLeftButtonUp="Category_MouseLeftButtonUp"
+             BorderThickness="0"
+             Background="Black"
+ 			 VirtualizingStackPanel.IsVirtualizing="True"
+			 VirtualizingStackPanel.VirtualizationMode="Recycling"
+			 ScrollViewer.CanContentScroll="False"
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+             ScrollViewer.VerticalScrollBarVisibility="Auto">
+        
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="BorderThickness" Value="6"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            </Style>
+        </ListBox.ItemContainerStyle>
+        
+        <ListBox.ItemsPanel>
+			<ItemsPanelTemplate>
+				<WrapPanel Orientation="Horizontal"/>
+			</ItemsPanelTemplate>
+		</ListBox.ItemsPanel>
+        
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<Border BorderThickness="1" BorderBrush="Gray" Margin="5">
+					<Image Source="{Binding Icon}"
+                           Width="250" Height="250"
+                           Stretch="Uniform"/>
+				</Border>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+        
+	</ListBox>
+
+</UserControl>

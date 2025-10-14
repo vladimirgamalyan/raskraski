@@ -1,0 +1,102 @@
+<UserControl x:Class="raskraski.ImageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Black">
+	<Grid>
+		<!-- Кнопка Назад -->
+		<Button HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Margin="0,0,0,0"
+        Width="120" Height="80"
+        Background="Transparent"
+        BorderThickness="0"
+        ToolTip="Назад"
+        Click="BackButton_Click">
+            <Path Stroke="White"
+          StrokeThickness="10"
+          StrokeLineJoin="Miter"
+          StrokeMiterLimit="20"
+          StrokeStartLineCap="Round"
+          StrokeEndLineCap="Round"
+          Data="M 45,10 L 10,40 L 45,70 M 20,40 L 90,40" />
+        </Button>
+
+		<!-- Галерея -->
+        <ListBox x:Name="ImagesListBox"
+                 ItemsSource="{Binding Images}"
+                 BorderThickness="0"
+                 Background="Black"
+                 Margin="0,100,0,0"
+                 VirtualizingStackPanel.IsVirtualizing="True"
+				 VirtualizingStackPanel.VirtualizationMode="Recycling"
+                 ScrollViewer.CanContentScroll="False"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+			<ListBox.ItemContainerStyle>
+				<Style TargetType="ListBoxItem">
+					<Setter Property="Margin" Value="0"/>
+					<Setter Property="BorderThickness" Value="8"/>
+					<Setter Property="BorderBrush" Value="Transparent"/>
+					<Setter Property="Background" Value="Transparent"/>
+					<Setter Property="HorizontalContentAlignment" Value="Center"/>
+					<Setter Property="VerticalContentAlignment" Value="Center"/>
+					<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+				</Style>
+			</ListBox.ItemContainerStyle>
+			
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="310" Height="438">
+                        <!-- Placeholder -->
+                        <Image Source="/raskraski;component/Assets/placeholder.png"
+                   Stretch="UniformToFill">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Opacity" Value="1"/>
+                                    <Style.Triggers>
+                                        <!-- Когда загружено — делаем полностью прозрачным -->
+                                        <DataTrigger Binding="{Binding IsLoaded}" Value="True">
+                                            <Setter Property="Opacity" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+
+                        <!-- Реальное изображение -->
+                        <Image Source="{Binding Bitmap}"
+                   Stretch="Uniform"
+                   MouseLeftButtonUp="Image_MouseLeftButtonUp">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Opacity" Value="0"/>
+                                    <Style.Triggers>
+                                        <!-- Когда изображение загружено -->
+                                        <DataTrigger Binding="{Binding IsLoaded}" Value="True">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>
+
+                                        <!-- Если изображение уже напечатано -->
+                                        <DataTrigger Binding="{Binding IsPrinted}" Value="True">
+                                            <Setter Property="Opacity" Value="0.4"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+		
+		
+	</Grid>
+</UserControl>
