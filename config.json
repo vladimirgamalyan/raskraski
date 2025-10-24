@@ -2,5 +2,7 @@
   "PictureDir": "../../../../raskraski_online/output/print",
   "CursorHotSpotX": 20,
   "CursorHotSpotY": 1,
-  "CursorScale": 0.5
+  "CursorScale": 0.5,
+  "PreviewWidth": 310,
+  "PreviewHeight": 438
 }

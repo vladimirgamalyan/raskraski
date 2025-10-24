@@ -15,9 +15,7 @@ namespace raskraski
 
         public static string GetFileName()
         {
-            string exeDir = AppContext.BaseDirectory;
-            string configPath = Path.Combine(exeDir, "config.json");
-            return configPath;
+            return Path.Combine(AppContext.BaseDirectory, "config.json");
         }
 
         public static AppConfig LoadConfig()
@@ -31,13 +29,6 @@ namespace raskraski
                 if (lastWrite == _lastReadTime)
                     return _cachedConfig;
             }
-
-            // иначе читаем заново
-            //if (!File.Exists(_file))
-            //{
-            //    _cachedConfig = new AppConfig { RootPath = "D:\\Categories" };
-            //    return _cachedConfig;
-            //}
 
             string json = File.ReadAllText(_file);
             _cachedConfig = JsonSerializer.Deserialize<AppConfig>(json) ?? new AppConfig();

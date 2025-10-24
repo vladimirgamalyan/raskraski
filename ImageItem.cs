@@ -131,6 +131,9 @@ namespace raskraski
             if (!File.Exists(FilePath))
                 return;
 
+            int PreviewWidth = ConfigManager.LoadConfig().PreviewWidth;
+            int PreviewHeight = ConfigManager.LoadConfig().PreviewHeight;
+
             try
             {
                 // 🔹 Проверяем кэш
@@ -150,7 +153,8 @@ namespace raskraski
                     var image = new BitmapImage();
                     image.BeginInit();
                     image.UriSource = new Uri(FilePath);
-                    image.DecodePixelWidth = 310;
+                    image.DecodePixelWidth = PreviewWidth;
+                    image.DecodePixelHeight = PreviewHeight;
                     image.CacheOption = BitmapCacheOption.OnLoad;
                     image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                     image.EndInit();

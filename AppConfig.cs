@@ -12,5 +12,8 @@ namespace raskraski
         public int CursorHotSpotX { get; set; } = 0;
         public int CursorHotSpotY { get; set; } = 0;
         public double CursorScale { get; set; } = 1.0;
+
+        public int PreviewWidth { get; set; } = 310;
+        public int PreviewHeight { get; set; } = 438;
     }
 }

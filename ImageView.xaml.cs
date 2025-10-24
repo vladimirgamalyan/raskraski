@@ -98,8 +98,8 @@ namespace raskraski
                 }
             }
 
-            double cellWidth = _cellWidth ?? 310;
-            double cellHeight = _cellHeight ?? 438;
+            double cellWidth = _cellWidth ?? ConfigManager.LoadConfig().PreviewWidth;
+            double cellHeight = _cellHeight ?? ConfigManager.LoadConfig().PreviewHeight;
 
             // Ширина окна просмотра
             double viewportWidth = scrollViewer.ViewportWidth;
